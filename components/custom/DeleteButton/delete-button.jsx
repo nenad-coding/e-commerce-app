@@ -41,6 +41,7 @@ export default function DeleteButton({ id, type }) {
       console.error(`Error deleting ${in_sentence}`, error)
     }
   }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger>
