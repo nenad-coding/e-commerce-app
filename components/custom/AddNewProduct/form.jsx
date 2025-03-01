@@ -16,36 +16,35 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   id: z.coerce.number().positive({ message: 'ID must be a positive number.' }),
-  username: z
-    .string()
-    .min(3, { message: 'Username must be at least 3 characters.' }),
-  email: z.string().email({ message: 'Invalid email format.' }),
-  password: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters.' }),
+  title: z.string().min(1, { message: 'Title is required.' }),
+  price: z.coerce
+    .number()
+    .positive({ message: 'Price must be a positive number.' }),
+  description: z.string().min(1, { message: 'Description is required.' }),
+  category: z.string().min(1, { message: 'Category is required.' }),
+  image: z.string().url({ message: 'Invalid image URL.' }),
 })
 
-export default function AddNewUserForm() {
-  const router = useRouter()
-
+export default function AddNewProductForm() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       id: 0,
-      username: '',
-      email: '',
-      password: '',
+      title: '',
+      price: '',
+      description: '',
+      category: '',
+      image: '',
     },
   })
 
   async function onSubmit(values) {
     try {
       // Send the form data to the API
-      const response = await fetch('https://fakestoreapi.com/users', {
+      const response = await fetch('https://fakestoreapi.com/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +57,7 @@ export default function AddNewUserForm() {
       }
 
       const data = await response.json()
-      toast('User has been created.')
+      toast('Product has been created.')
     } catch (error) {
       console.error('Error submitting form:', error)
     }
@@ -66,7 +65,7 @@ export default function AddNewUserForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
         <FormField
           control={form.control}
           name="id"
@@ -77,7 +76,7 @@ export default function AddNewUserForm() {
                 <Input type="number" placeholder="123" {...field} />
               </FormControl>
               <FormDescription>
-                This is a unique identifier for the user.
+                This is a unique identifier for the product.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -85,49 +84,78 @@ export default function AddNewUserForm() {
         />
         <FormField
           control={form.control}
-          name="username"
+          name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="nenadrakovic..." {...field} />
+                <Input placeholder="Product Title" {...field} />
+              </FormControl>
+              <FormDescription>Enter the product's title.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="price"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Price</FormLabel>
+              <FormControl>
+                <Input type="number" placeholder="0" {...field} />
               </FormControl>
               <FormDescription>
-                This is user public display username.
+                Enter the product's price. It must be a positive number.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
-          name="email"
+          name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input
-                  type="email"
-                  placeholder="nenadrakovic.coding@gmail.com"
-                  {...field}
-                />
+                <Input placeholder="Product description..." {...field} />
               </FormControl>
-              <FormDescription>Enter a valid email address.</FormDescription>
+              <FormDescription>
+                Enter a brief description of the product.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
-          name="password"
+          name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Category</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="********" {...field} />
+                <Input placeholder="Category" {...field} />
+              </FormControl>
+              <FormDescription>Enter the product's category.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Image URL</FormLabel>
+              <FormControl>
+                <Input placeholder="http://image.url" {...field} />
               </FormControl>
               <FormDescription>
-                Choose a password (minimum 6 characters).
+                Enter the URL of the product image (optional).
               </FormDescription>
               <FormMessage />
             </FormItem>
