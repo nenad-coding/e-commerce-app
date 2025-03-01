@@ -1,4 +1,5 @@
 import AddNewProductItem from '@/components/custom/AddNewProduct/item'
+import DeleteButton from '@/components/custom/DeleteButton/delete-button'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -37,11 +38,7 @@ export default async function ProductsPage() {
             />
           </CardContent>
           <CardFooter className="flex gap-x-4 justify-center">
-            <Button
-              variant="outline"
-              className="h-[35px] shadow-md text-red-500">
-              Delete
-            </Button>
+            <DeleteButton id={product.id} type="products" />
             <Link href={`/products/${product.id}`}>
               <Button variant="outline" className="h-[35px] shadow-md">
                 View

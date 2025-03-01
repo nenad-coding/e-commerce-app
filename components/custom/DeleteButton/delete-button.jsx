@@ -13,10 +13,18 @@ import {
 } from '@/components/ui/alert-dialog'
 import { toast } from 'sonner'
 
-export default function DeleteButton({ id }) {
+export default function DeleteButton({ id, type }) {
+  let in_sentence = ''
+  switch (type) {
+    case 'users':
+      in_sentence = 'User'
+    case 'products':
+      in_sentence = 'Product'
+  }
+
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://fakestoreapi.com/users/${id}`, {
+      const response = await fetch(`https://fakestoreapi.com/${type}/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -24,13 +32,13 @@ export default function DeleteButton({ id }) {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to delete user')
+        throw new Error(`Failed to delete ${in_sentence}`)
       }
 
       const data = await response.json()
-      toast('User has been deleted.')
+      toast(`${in_sentence} has been deleted.`)
     } catch (error) {
-      console.error('Error deleting user:', error)
+      console.error(`Error deleting ${in_sentence}`, error)
     }
   }
   return (
@@ -46,8 +54,8 @@ export default function DeleteButton({ id }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete user and
-            remove all data from our servers.
+            This action cannot be undone. This will permanently delete{' '}
+            {in_sentence} and remove all data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

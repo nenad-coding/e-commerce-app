@@ -58,7 +58,7 @@ export default async function UsersPage() {
             </div>
           </CardContent>
           <CardFooter className="flex gap-x-4 justify-center">
-            <DeleteButton id={user.id} />
+            <DeleteButton id={user.id} type={'users'} />
             <Link href={`/users/${user.id}`}>
               <Button className="h-[35px] shadow-md">View</Button>
             </Link>
