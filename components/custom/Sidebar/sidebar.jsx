@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Sidebar() {
   return (
-    <div className="shadow-lg min-w-[250px] h-screen flex flex-col p-8 gap-y-8 text-xl">
+    <div className="fixed shadow-lg min-w-[250px] h-screen flex flex-col p-8 gap-y-8 text-xl">
       <Link href="/categories" className="flex gap-x-4">
         <Folders />
         <span className="font-bold">Categories</span>
