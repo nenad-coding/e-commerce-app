@@ -16,8 +16,6 @@ export default async function UserPage({ params }) {
     response => response.json(),
   )
 
-  console.log(data)
-
   return (
     <div className="px-16 py-8">
       <Card className="px-8 py-4 flex flex-col h-full pb-24">

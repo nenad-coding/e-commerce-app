@@ -7,6 +7,7 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card'
+import DeleteButton from '@/components/custom/DeleteButton/delete-button'
 import Link from 'next/link'
 
 export default async function UsersPage() {
@@ -57,11 +58,7 @@ export default async function UsersPage() {
             </div>
           </CardContent>
           <CardFooter className="flex gap-x-4 justify-center">
-            <Button
-              variant="outline"
-              className="h-[35px] shadow-md text-red-500">
-              Delete
-            </Button>
+            <DeleteButton id={user.id} />
             <Link href={`/users/${user.id}`}>
               <Button className="h-[35px] shadow-md">View</Button>
             </Link>
