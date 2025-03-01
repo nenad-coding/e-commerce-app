@@ -1,3 +1,4 @@
+import AddNewUserItem from '@/components/custom/AddNewUser/item'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -6,7 +7,6 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card'
-import { CirclePlus } from 'lucide-react'
 import Link from 'next/link'
 
 export default async function UsersPage() {
@@ -16,14 +16,7 @@ export default async function UsersPage() {
 
   return (
     <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-24 py-8 px-16">
-      <Card className="min-h-[270px] w-full shadow-lg">
-        <CardHeader className="flex">
-          <CardDescription className="mx-auto">Add new user</CardDescription>
-        </CardHeader>
-        <CardContent className="flex mt-[30px] cursor-pointer">
-          <CirclePlus className="size-24 mx-auto" />
-        </CardContent>
-      </Card>
+      <AddNewUserItem />
       {usersData.map((user, index) => (
         <Card
           key={index}

@@ -41,6 +41,10 @@ export default async function UserPage({ params }) {
                 ID: <span className="font-bold text-xl">{data.id}</span>
               </p>
               <p>
+                Usrname:{' '}
+                <span className="font-bold text-xl">{data.username}</span>
+              </p>
+              <p>
                 Phone: <span className="font-bold text-xl">{data.phone}</span>
               </p>
               <p className="text-2xl font-bold mt-8">Address</p>

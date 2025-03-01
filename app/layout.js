@@ -2,6 +2,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import Sidebar from '@/components/custom/Sidebar/sidebar'
+import { Toaster } from '@/components/ui/sonner'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <main className="flex pt-[60px]">
           <Sidebar />
           <div className="grow pl-[250px]">{children}</div>
+          <Toaster />
         </main>
       </body>
     </html>
