@@ -25,8 +25,8 @@ export default async function CategoriesPage() {
                   <p className="capitalize">{category}</p>
                 </AccordionTrigger>
                 <AccordionContent>
-                  {categoryMap[category].map(product => (
-                    <div className="mb-8 flex flex-col">
+                  {categoryMap[category].map((product, index) => (
+                    <div className="mb-8 flex flex-col" key={index}>
                       <p className="font-semibold text-base">{product.title}</p>
                       <div className="flex justify-between">
                         <p className="min-w-[50px] text-xl font-bold">

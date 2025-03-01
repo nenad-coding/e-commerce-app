@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/card'
 import { CirclePlus } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default async function ProductsPage() {
   const productsData = await fetch('https://fakestoreapi.com/products').then(
@@ -48,9 +49,11 @@ export default async function ProductsPage() {
               className="h-[35px] shadow-md text-red-500">
               Delete
             </Button>
-            <Button variant="outline" className="h-[35px] shadow-md">
-              View
-            </Button>
+            <Link href={`/products/${product.id}`}>
+              <Button variant="outline" className="h-[35px] shadow-md">
+                View
+              </Button>
+            </Link>
           </CardFooter>
         </Card>
       ))}
